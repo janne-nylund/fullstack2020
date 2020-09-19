@@ -7,7 +7,6 @@ const App = (props) => {
 
   const selectAnecdote = () => {
     setSelected(Math.floor(Math.random() * 6))
-    console.log(votes) 
   }
 
   const addVote = () => {
