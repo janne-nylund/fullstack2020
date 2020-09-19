@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 
 const Statistics = (props) => {
     return (
-    <div>
-      <p>{props.text} {props.value}</p>
-    </div> 
+    <tr>
+      <td>{props.text}</td><td> {props.value}</td>
+    </tr> 
   )
 }
 
@@ -51,12 +51,16 @@ const App = () => {
       <Button onClick={handleNeutral} text='neutral' />
       <Button onClick={handleBad} text='bad' />
       <h1>statistics</h1>
+      <table>
+      <tbody>
       <Statistics text='good' value={good} />
       <Statistics text='neutral' value={neutral} />
       <Statistics text='bad' value={bad} />
       <Statistics text='all' value={good + neutral + bad} />
       <Statistics text='average' value={(good * 1 + neutral * 0 + bad * -1)/(good + neutral + bad)} />
       <Statistics text='positive' value={ good / (good + neutral + bad) * 100 + ' %'}  />
+      </tbody>
+      </table>
     </div>
   )
 }
