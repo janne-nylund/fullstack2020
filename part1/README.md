@@ -8,9 +8,9 @@
 - [x] Exercise 1.6
 - [x] Exercise 1.7
 - [x] Exercise 1.8
-- [ ] Exercise 1.9
-- [ ] Exercise 1.10
-- [ ] Exercise 1.11
+- [x] Exercise 1.9
+- [x] Exercise 1.10
+- [x] Exercise 1.11
 - [ ] Exercise 1.12
 - [ ] Exercise 1.13
 - [ ] Exercise 1.14
