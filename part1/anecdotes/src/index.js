@@ -12,15 +12,30 @@ const App = (props) => {
   const addVote = () => {
     const copy = [...votes]
     copy[selected] += 1  
-    setVotes(copy) 
+    setVotes(copy)
+  }
+
+  const Most = () => {
+    if (Math.max(...votes) > 0) {
+    return(
+    <div>
+      <h1>Anecdote with the most votes</h1>
+      <p>{props.anecdotes[votes.indexOf(Math.max(...votes))]}</p>
+      <p>has {Math.max(...votes)} votes</p>
+    </div>
+    )
+  }
+  return null
   }
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{props.anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <Button onClick={addVote} text='vote' />
       <Button onClick={selectAnecdote} text='next anecdote' />
+      <Most />
     </div>
   )
 }
