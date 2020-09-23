@@ -1,11 +1,26 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Statistics = (props) => {
+const Statistic = (props) => {
     return (
     <tr>
       <td>{props.text}</td><td> {props.value}</td>
     </tr> 
+  )
+}
+
+const Statistics = (props) => {
+  return (
+  <table>
+      <tbody>
+      <Statistic text='good' value={props.good} />
+      <Statistic text='neutral' value={props.neutral} />
+      <Statistic text='bad' value={props.bad} />
+      <Statistic text='all' value={props.good + props.neutral + props.bad} />
+      <Statistic text='average' value={(props.good * 1 + props.neutral * 0 + props.bad * -1)/(props.good + props.neutral + props.bad)} />
+      <Statistic text='positive' value={props.good / (props.good + props.neutral + props.bad) * 100 + ' %'}  />
+      </tbody>
+  </table>
   )
 }
 
@@ -51,16 +66,7 @@ const App = () => {
       <Button onClick={handleNeutral} text='neutral' />
       <Button onClick={handleBad} text='bad' />
       <h1>statistics</h1>
-      <table>
-      <tbody>
-      <Statistics text='good' value={good} />
-      <Statistics text='neutral' value={neutral} />
-      <Statistics text='bad' value={bad} />
-      <Statistics text='all' value={good + neutral + bad} />
-      <Statistics text='average' value={(good * 1 + neutral * 0 + bad * -1)/(good + neutral + bad)} />
-      <Statistics text='positive' value={ good / (good + neutral + bad) * 100 + ' %'}  />
-      </tbody>
-      </table>
+      <Statistics good={good} neutral={neutral} bad={bad}/>
     </div>
   )
 }
