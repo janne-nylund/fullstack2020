@@ -15,6 +15,14 @@ const Statistics = (props) => {
   const average = (good - bad) / all
   const positive = good / all * 100 + ' %'
 
+  if (good + neutral + bad === 0){
+    return(
+      <div>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
   return (
   <table>
       <tbody>
@@ -49,19 +57,6 @@ const App = () => {
   }
   const handleBad = () => {
     setBad(bad + 1)
-  }
-
-  if (good + neutral + bad === 0){
-    return(
-      <div>
-        <h1>give feedback</h1>
-        <Button onClick={handleGood} text='good' />
-        <Button onClick={handleNeutral} text='neutral' />
-        <Button onClick={handleBad} text='bad' />
-        <h1>statistics</h1>
-        <p>No feedback given</p>
-      </div>
-    )
   }
 
   return (
