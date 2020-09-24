@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 const App = (props) => {
   // zero or random
-  const [selected, setSelected] = useState(Math.floor(Math.random() * 6))
+  const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array.apply(null, new Array(6)).map(Number.prototype.valueOf,0))
 
   const selectAnecdote = () => {
