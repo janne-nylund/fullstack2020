@@ -16,7 +16,7 @@ const Course = ({courses}) => {
   
   const Header = ({courseName}) => {
     return (
-      <h1>{courseName.name}</h1>
+      <h2>{courseName.name}</h2>
     )
   }
   
