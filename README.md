@@ -7,9 +7,9 @@
 - [x] Exercise 2.5
 - [x] Exercise 2.6
 - [x] Exercise 2.7
-- [ ] Exercise 2.8
-- [ ] Exercise 2.9
-- [ ] Exercise 2.10
+- [x] Exercise 2.8
+- [x] Exercise 2.9
+- [x] Exercise 2.10
 - [ ] Exercise 2.11
 - [ ] Exercise 2.12
 - [ ] Exercise 2.13
