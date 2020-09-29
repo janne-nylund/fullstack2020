@@ -17,7 +17,7 @@ const App = (props) => {
       })
   }, [])
 
-  const Coutries = ({countries}) => {
+  const Countries = ({countries}) => {
     return (
         <div>
         {countriesToShow.map((country) => 
@@ -77,7 +77,7 @@ const App = (props) => {
       />
       <br/> {tooMany}
     </div>
-        <Coutries countries = {countriesToShow} />
+        <Countries countries = {countriesToShow} />
         <Country country = {countryToShow} />
     </div>
   )
