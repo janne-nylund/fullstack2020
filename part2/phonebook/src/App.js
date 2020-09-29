@@ -25,7 +25,8 @@ const App = (props) => {
 
     const nameObject = {
       name: newName,
-      number: newNumber
+      number: newNumber,
+      id: persons.length + 1
     }
 
     // array.some -> if atleast one of the elements match

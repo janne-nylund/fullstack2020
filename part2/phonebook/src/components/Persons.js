@@ -4,7 +4,7 @@ import Person from './Person'
 const Persons = ({personsToShow}) => {
     return (
       <div>{personsToShow.map((person) =>
-        <div key={person.name}>  
+        <div key={person.id}>  
         <Person person={person} />
         </div>
     )}
