@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-//import Note from './components/Note'
 
 const App = (props) => {
   const [countries, setCountries] = useState([])
@@ -73,10 +72,10 @@ const App = (props) => {
   return (
     <div>
     <div>Filter shown with
-        <input 
-          onChange={handleFindChange}
-        />
-        <br/> {tooMany}
+      <input 
+        onChange={handleFindChange}
+      />
+      <br/> {tooMany}
     </div>
         <Coutries countries = {countriesToShow} />
         <Country country = {countryToShow} />
