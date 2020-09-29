@@ -11,7 +11,6 @@ const App = () => {
   ]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
-  // const [ findPersons, setFindPersons ] = useState('')
   const [ personsToShow, setPersonsToShow ] = useState(persons)
 
   const addPerson = (event) => {
@@ -34,7 +33,7 @@ const App = () => {
   }
 
   const handleNameChange = (event) => {
-    console.log(event.target.value)
+    //console.log(event.target.value)
     setNewName(event.target.value)
   }
 
@@ -47,7 +46,7 @@ const App = () => {
     // setFindPersons(event.target.value)
     const searchString = event.target.value
     setPersonsToShow(persons.filter(person => person.name.toLowerCase().includes(searchString.toLowerCase())))
-    console.log(searchString.toLowerCase())
+    // console.log(searchString.toLowerCase())
   }
 
   return (
