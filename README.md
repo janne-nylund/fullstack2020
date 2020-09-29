@@ -10,8 +10,8 @@
 - [x] Exercise 2.8
 - [x] Exercise 2.9
 - [x] Exercise 2.10
-- [ ] Exercise 2.11
-- [ ] Exercise 2.12
+- [x] Exercise 2.11
+- [x] Exercise 2.12
 - [ ] Exercise 2.13
 - [ ] Exercise 2.14
 - [ ] Exercise 2.15
