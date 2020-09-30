@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Country from './components/Country'
+import ClickedCountry from './components/ClickedCountry'
 
 const App = (props) => {
   const [countries, setCountries] = useState([])
-  const [countriesToShow, setCountriesToShow] = useState([])
   const [tooMany, setTooMany] = useState('')
+  const [countriesToShow, setCountriesToShow] = useState([])
   const [countryToShow, setCountryToShow] = useState([])
+  const [showClicked, setShowClicked] = useState([])
 
   useEffect(() => {
     console.log('effect')
@@ -17,39 +20,30 @@ const App = (props) => {
       })
   }, [])
 
+
   const Countries = ({countries}) => {
     return (
         <div>
         {countriesToShow.map((country) => 
           <div key={country.name}>
-          <p>{country.name}</p>
+          <p>{country.name} 
+            <button 
+              value={country.name} 
+              onClick={search => showClickedCountry(search.target.value)}
+            >
+              view
+            </button>
+          </p>
           </div>
         )}
         </div>
     )
   }
 
-  const Country = ({country}) => {
-    return (
-        <div>
-        {countryToShow.map((country) => 
-          <div key={country.name}>
-          <h1>{country.name}</h1>
-          <p><b>Capital:</b> {country.capital}</p>
-          <p><b>Population:</b> {country.population}</p>
-          <h2>Languages</h2>
-          <ul>
-            {country.languages.map(lang => 
-              <li key={lang.iso639_1}>
-              {lang.name}
-              </li>
-            )}
-          </ul>
-          <img src={country.flag} alt='flag' width='150px' />
-          </div>
-        )}
-        </div>
-    )
+  const showClickedCountry= (search) => {
+    const clickFilter = countries.filter(country => country.name.toLowerCase().includes(search.toLowerCase()))
+    setShowClicked(clickFilter)
+    setCountryToShow([])
   }
 
   const handleFindChange = (event) => {
@@ -57,6 +51,7 @@ const App = (props) => {
     const filtered = countries.filter(country => country.name.toLowerCase().includes(searchString.toLowerCase()))
     setCountriesToShow([])
     setCountryToShow([])
+    setShowClicked([])
     setTooMany('')
     console.log(filtered.length);
     if (filtered.length > 10 && filtered.length < countries.length-1) {
@@ -68,7 +63,7 @@ const App = (props) => {
         setCountryToShow(filtered)
     }
   }
-
+ 
   return (
     <div>
     <div>Filter shown with
@@ -76,9 +71,10 @@ const App = (props) => {
         onChange={handleFindChange}
       />
       <br/> {tooMany}
-    </div>
+      </div>
         <Countries countries = {countriesToShow} />
         <Country country = {countryToShow} />
+        <ClickedCountry country = {showClicked} />
     </div>
   )
 }
