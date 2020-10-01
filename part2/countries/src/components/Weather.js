@@ -30,7 +30,7 @@ return (
         <h2>Weather in {capitalName}</h2>
         <p><b>Temperature: {weather.current.temperature} °C</b></p>
         <img alt={weather} src={weather.current.weather_icons} />
-        <p><b>Wind:</b> {Math.round(weather.current.wind_speed/3.6)} m/s ({weather.current.wind_dir})</p>
+        <p><b>Wind:</b> {Math.round(weather.current.wind_speed/3.6)} m/s direction {weather.current.wind_dir}</p>
     </div>
 )
 }
