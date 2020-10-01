@@ -11,11 +11,9 @@ const App = (props) => {
   const [showClicked, setShowClicked] = useState([])
 
   useEffect(() => {
-    console.log('effect')
     axios
       .get('https://restcountries.eu/rest/v2/all')
       .then(response => {
-        console.log('promise fulfilled')
         setCountries(response.data)
       })
   }, [])
@@ -53,13 +51,11 @@ const App = (props) => {
     setCountryToShow([])
     setShowClicked([])
     setTooMany('')
-    console.log(filtered.length);
     if (filtered.length > 10 && filtered.length < countries.length-1) {
         setTooMany('Too many matches, specify another filter')
     } else if (filtered.length > 1 && filtered.length <= 10){
         setCountriesToShow(filtered)
     } else if (filtered.length === 1){
-        console.log(filtered);
         setCountryToShow(filtered)
     }
   }

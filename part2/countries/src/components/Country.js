@@ -1,6 +1,8 @@
 import React from 'react'
+import Weather from './Weather'
 
 const Country = ({country}) => {
+
     return (
         <div>
         {country.map((country) => 
@@ -17,8 +19,10 @@ const Country = ({country}) => {
             )}
           </ul>
           <img src={country.flag} alt='flag' width='150px' />
+          <Weather capital={country.capital} alt={country.altSpellings[0]} />
           </div>
         )}
+        
         </div>
     )
   }
