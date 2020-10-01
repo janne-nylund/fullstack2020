@@ -3,36 +3,34 @@ import axios from 'axios'
 
 const WeatherFetch = (props) => {
     
-    const capitalName = props.capital+','+props.alt
+    const capitalName = props.capital
     const key = process.env.REACT_APP_API_KEY
-    const [name,setName] = useState('')
-    const [mainTemp,setMainTemp] = useState('')
-    const [wind,setWind] = useState('')
-    const [windDir,setWindDir] = useState('')
-    const [iconID,setIconID] = useState('10d')
-    const [weather,setWeather] = useState('')
+    const [weather, setWeather] = useState(
+        {
+            "current":[
+              { 
+              "temperature": "",
+              "wind_speed": "",
+              "wind_dir": "",
+              "weather_icons": "", 
+              }  ]
+          }
+    )
 
     useEffect(() => {
         axios
-        .get(`http://api.openweathermap.org/data/2.5/weather?q=${capitalName}&appid=${key}&units=metric`)
+        .get(`http://api.weatherstack.com/current?access_key=${key}&query=${capitalName}`)
     .then(response => {
-    setName(response.data.name)
-    setMainTemp(Math.round(response.data.main.temp))
-    setWind(response.data.wind.speed)
-    setWindDir(response.data.wind.deg)
-    setIconID(response.data.weather[0].icon)
-    setWeather(response.data.weather[0].description.toUpperCase())
+        setWeather(response.data)
     })
 },[capitalName, key])
 
-const url = iconID + "@2x.png"
 return (
     <div>
-        <h2>Weather in {name}</h2>
-        <p><b>Temperature: {mainTemp} °C</b></p>
-        <img alt={weather} src={`http://openweathermap.org/img/wn/${url}`} />
-        <p><small>{weather}</small></p>
-        <p><b>Wind:</b> {wind} m/s ({windDir} degrees)</p>
+        <h2>Weather in {capitalName}</h2>
+        <p><b>Temperature: {weather.current.temperature} °C</b></p>
+        <img alt={weather} src={weather.current.weather_icons} />
+        <p><b>Wind:</b> {Math.round(weather.current.wind_speed/3.6)} m/s ({weather.current.wind_dir})</p>
     </div>
 )
 }
