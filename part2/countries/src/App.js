@@ -47,17 +47,27 @@ const App = (props) => {
   const handleFindChange = (event) => {
     const searchString = event.target.value
     const filtered = countries.filter(country => country.name.toLowerCase().includes(searchString.toLowerCase()))
-    setCountriesToShow([])
-    setCountryToShow([])
-    setShowClicked([])
     setTooMany('')
+    
     if (filtered.length > 10 && filtered.length < countries.length-1) {
         setTooMany('Too many matches, specify another filter')
+        setCountriesToShow([])
+        setCountryToShow([])
+        setShowClicked([])
     } else if (filtered.length > 1 && filtered.length <= 10){
         setCountriesToShow(filtered)
+        setCountryToShow([])
+        setShowClicked([])
     } else if (filtered.length === 1){
         setCountryToShow(filtered)
-    }
+        setCountriesToShow([])
+        setShowClicked([])   
+    }  else if (filtered.length === 0){
+      setCountriesToShow([])
+      setShowClicked([])
+      setCountryToShow([])
+      setTooMany('No matches found')   
+  }
   }
  
   return (
