@@ -23,20 +23,26 @@ const App = (props) => {
   const addPerson = (event) => {
     event.preventDefault()
 
-    const nameObject = {
+    const personObject = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1
     }
+
+    
 
     // array.some -> if atleast one of the elements match
     if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase())) {
       window.alert(`${newName} is already added to the phonebook`)
     } else {
-      setPersons(persons.concat(nameObject))
-      setPersonsToShow(persons.concat(nameObject))
-      setNewName('')
-      setNewNumber('')
+      axios
+        .post('http://localhost:3001/persons', personObject)
+        .then(response => {
+           setPersons(persons.concat(response.data))
+           setPersonsToShow(persons.concat(response.data))
+           setNewName('')
+           setNewNumber('')
+    })
+      
     }
   }
 
