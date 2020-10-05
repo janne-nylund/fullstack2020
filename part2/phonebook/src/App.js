@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import personService from './services/persons'
 import PhonebookForm from './components/PhonebookForm'
 import Persons from './components/Persons'
 
@@ -10,14 +10,14 @@ const App = (props) => {
   const [ personsToShow, setPersonsToShow ] = useState([])
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
-        setPersonsToShow(response.data)
-      })
+    //console.log('effect')
+    personService
+    .getAll()
+    .then(initialPersons => {
+      //console.log('promise fulfilled')
+      setPersons(initialPersons)
+      setPersonsToShow(initialPersons)
+  })
   }, [])
 
   const addPerson = (event) => {
@@ -34,13 +34,13 @@ const App = (props) => {
     if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase())) {
       window.alert(`${newName} is already added to the phonebook`)
     } else {
-      axios
-        .post('http://localhost:3001/persons', personObject)
-        .then(response => {
-           setPersons(persons.concat(response.data))
-           setPersonsToShow(persons.concat(response.data))
-           setNewName('')
-           setNewNumber('')
+      personService
+        .create(personObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setPersonsToShow(persons.concat(returnedPerson))
+          setNewName('')
+          setNewNumber('')
     })
       
     }
