@@ -62,7 +62,7 @@ const App = (props) => {
           setPersons(updatePersons)
           setPersonsToShow(updatePersons)
         })
-      }, 1)
+      }, 10)
       
     }
   }
