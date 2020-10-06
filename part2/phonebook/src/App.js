@@ -8,13 +8,12 @@ const App = (props) => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ personsToShow, setPersonsToShow ] = useState([])
+  const [ filterValue, setFilterValue] = useState('')
 
   useEffect(() => {
-    //console.log('effect')
     personService
     .getAll()
     .then(initialPersons => {
-      //console.log('promise fulfilled')
       setPersons(initialPersons)
       setPersonsToShow(initialPersons)
   })
@@ -27,8 +26,6 @@ const App = (props) => {
       name: newName,
       number: newNumber,
     }
-
-    
 
     // array.some -> if atleast one of the elements match
     if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase())) {
@@ -46,28 +43,50 @@ const App = (props) => {
     }
   }
 
+  const removePerson = (id) => {
+    const personToRemove = persons.find(person => person.id === Number(id))
+    if (window.confirm(`Delete ${personToRemove.name}?`)){   
+      personService
+      .remove(id)
+      setFilterValue('')
+
+      /* const personsLeft = persons.filter(person => person.id !== Number(id))
+      setPersons(personsLeft)
+      setPersonsToShow(personsLeft)
+      setFilterValue('') */
+      
+      setTimeout(() => {
+        personService
+          .getAll()
+          .then(updatePersons => {
+          setPersons(updatePersons)
+          setPersonsToShow(updatePersons)
+        })
+      }, 1)
+      
+    }
+  }
+
   const handleNameChange = (event) => {
-    //console.log(event.target.value)
     setNewName(event.target.value)
   }
 
   const handleNumberChange = (event) => {
-    // console.log(event.target.value)
     setNewNumber(event.target.value)
   }
 
   const handleFindChange = (event) => {
-    // setFindPersons(event.target.value)
     const searchString = event.target.value
+    setFilterValue(searchString)
     setPersonsToShow(persons.filter(person => person.name.toLowerCase().includes(searchString.toLowerCase())))
-    // console.log(searchString.toLowerCase())
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
       <div>Filter shown with
-        <input 
+        <input
+          value={filterValue} 
           onChange={handleFindChange}
         />
       </div>
@@ -80,7 +99,7 @@ const App = (props) => {
         handleNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons personsToShow={personsToShow} />
+      <Persons removePerson={removePerson} personsToShow={personsToShow} />
     </div>
   )
 }
