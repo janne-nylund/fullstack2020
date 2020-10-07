@@ -47,7 +47,7 @@ const App = (props) => {
         setNewName('')
         setNewNumber('')
         setFilterValue('')
-        setAddedMessage(`${newName}'s number was updated`)
+        setAddedMessage(`${newName}'s number was updated in the phonebook`)
           setTimeout(() => {
             setAddedMessage(null)
           }, 2500)
