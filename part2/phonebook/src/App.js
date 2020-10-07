@@ -94,7 +94,7 @@ const App = (props) => {
     if (window.confirm(`Delete ${personToRemove.name}?`)){   
       personService
       .remove(id)
-      .then(alreadyRemoved => {
+      .then(response => {
       setFilterValue('')
       setPersons(persons.filter(p => p.id !== Number(id)))
       setPersonsToShow(persons.filter(p => p.id !== Number(id)))
