@@ -98,14 +98,14 @@ const App = (props) => {
       setFilterValue('')
       setPersons(persons.filter(p => p.id !== Number(id)))
       setPersonsToShow(persons.filter(p => p.id !== Number(id)))
-      setAddedMessage(`${personToRemove.name} deleted, status: ${response}`)
+      setAddedMessage(`${personToRemove.name} was deleted, status: ${response}`)
           setTimeout(() => {
             setAddedMessage(null)
           }, 2500)
     })
     .catch(error => {
       setDeletedMessage(
-        `${personToRemove.name} was already removed from server!`
+        `${personToRemove.name} was already removed from server, status: ${error.response.status}`
       )
       setTimeout(() => {
         setDeletedMessage(null)
