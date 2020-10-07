@@ -114,7 +114,7 @@ const App = (props) => {
       setPersons(persons.filter(p => p.id !== personToRemove.id))
       setPersonsToShow(persons.filter(p => p.id !== personToRemove.id))
     })
-  } 
+   } 
   }
 
   const handleNameChange = (event) => {
