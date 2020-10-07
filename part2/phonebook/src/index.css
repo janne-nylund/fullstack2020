@@ -11,3 +11,47 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+h1 {
+  color: green;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.addButton {
+  margin-left: 0px;
+}
+
+input {
+  margin-left: 10px;
+}
+.textInputs {
+  margin-bottom: 5px;
+}
+
+.wrapper{
+  margin-left: 20px;
+}
+
+.added {
+  color: green;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.deleted {
+  color: red;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}

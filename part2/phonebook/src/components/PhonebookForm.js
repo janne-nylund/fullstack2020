@@ -3,14 +3,14 @@ import React from 'react'
 const PhonebookForm = (props) => {
     return(
       <form onSubmit={props.addPerson}>
-          <div>
+          <div className="textInputs">
             Name:
-            <input 
+            <input
             value={props.newName} 
             onChange={props.handleNameChange}
             />
           </div>
-          <div>
+          <div className="textInputs">
             Number:
             <input 
             value={props.newNumber} 
@@ -18,7 +18,7 @@ const PhonebookForm = (props) => {
             />
           </div>
           <div>
-            <button type="submit">add</button>
+            <button type="submit" className="addButton">add</button>
           </div>
         </form>
     )
