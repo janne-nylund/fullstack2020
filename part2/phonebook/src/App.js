@@ -47,7 +47,7 @@ const App = (props) => {
         setNewName('')
         setNewNumber('')
         setFilterValue('')
-        setAddedMessage(`${newName}'s number was updated in the phonebook`)
+        setAddedMessage(`${newName}'s number was updated!`)
           setTimeout(() => {
             setAddedMessage(null)
           }, 2500)
@@ -55,7 +55,7 @@ const App = (props) => {
 
       .catch(error => {
         setDeletedMessage(
-          `${personToUpdate.name} was already removed from server`
+          `${personToUpdate.name} was already removed from server!`
         )
         setTimeout(() => {
           setDeletedMessage(null)
@@ -69,7 +69,7 @@ const App = (props) => {
     }
     else if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase() && person.number === newNumber)) {
       const personExists = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
-      window.alert(`${personExists.name} already exists in the phonebook.`);
+      window.alert(`${personExists.name} already exists in the phonebook!`);
     }    
     else {
       personService
@@ -80,7 +80,7 @@ const App = (props) => {
           setNewName('')
           setNewNumber('')
           setFilterValue('')
-          setAddedMessage(`${newName} was added to the phonebook`)
+          setAddedMessage(`${newName} was added to the phonebook!`)
           setTimeout(() => {
             setAddedMessage(null)
           }, 2500)
@@ -99,7 +99,7 @@ const App = (props) => {
       setPersons(persons.filter(p => p.id !== Number(id)))
       setPersonsToShow(persons.filter(p => p.id !== Number(id)))
 
-      setDeletedMessage(`${personToRemove.name} was deleted from the phonebook`)
+      setDeletedMessage(`${personToRemove.name} was deleted from the phonebook!`)
           setTimeout(() => {
             setDeletedMessage(null)
           }, 2500)
