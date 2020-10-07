@@ -99,9 +99,9 @@ const App = (props) => {
       setPersons(persons.filter(p => p.id !== Number(id)))
       setPersonsToShow(persons.filter(p => p.id !== Number(id)))
 
-      setDeletedMessage(`${personToRemove.name} was deleted from the phonebook!`)
+      setAddedMessage(`${personToRemove.name} was deleted from the phonebook!`)
           setTimeout(() => {
-            setDeletedMessage(null)
+            setAddedMessage(null)
           }, 2500)
     })
     .catch(error => {
