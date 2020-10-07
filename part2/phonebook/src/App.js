@@ -98,8 +98,7 @@ const App = (props) => {
       setFilterValue('')
       setPersons(persons.filter(p => p.id !== Number(id)))
       setPersonsToShow(persons.filter(p => p.id !== Number(id)))
-
-      setAddedMessage(`${personToRemove.name} was deleted from the phonebook!`)
+      setAddedMessage(`${personToRemove.name} deleted, status: ${response}`)
           setTimeout(() => {
             setAddedMessage(null)
           }, 2500)
