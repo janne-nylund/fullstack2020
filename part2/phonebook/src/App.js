@@ -10,8 +10,8 @@ const App = (props) => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ personsToShow, setPersonsToShow ] = useState([])
   const [ filterValue, setFilterValue] = useState('')
-  const [ addedMessage, setAddedMessage] = useState(null)
-  const [ deletedMessage, setDeletedMessage] = useState(null)
+  const [ successMessage, setSuccessMessage] = useState(null)
+  const [ errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -47,18 +47,18 @@ const App = (props) => {
         setNewName('')
         setNewNumber('')
         setFilterValue('')
-        setAddedMessage(`${newName}'s number was updated!`)
+        setSuccessMessage(`${newName}'s number was updated`)
           setTimeout(() => {
-            setAddedMessage(null)
+            setSuccessMessage(null)
           }, 2500)
       })
 
       .catch(error => {
-        setDeletedMessage(
-          `${personToUpdate.name} was already removed from server!`
+        setErrorMessage(
+          `${personToUpdate.name} was already removed from server`
         )
         setTimeout(() => {
-          setDeletedMessage(null)
+          setErrorMessage(null)
         }, 2500)
         setPersons(persons.filter(p => p.id !== personToUpdate.id))
         setPersonsToShow(persons.filter(p => p.id !== personToUpdate.id))
@@ -69,7 +69,7 @@ const App = (props) => {
     }
     else if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase() && person.number === newNumber)) {
       const personExists = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
-      window.alert(`${personExists.name} already exists in the phonebook!`);
+      window.alert(`${personExists.name} already exists in the phonebook`);
     }    
     else {
       personService
@@ -80,9 +80,9 @@ const App = (props) => {
           setNewName('')
           setNewNumber('')
           setFilterValue('')
-          setAddedMessage(`${newName} was added to the phonebook!`)
+          setSuccessMessage(`${newName} was added to the phonebook`)
           setTimeout(() => {
-            setAddedMessage(null)
+            setSuccessMessage(null)
           }, 2500)
     })
       
@@ -98,17 +98,17 @@ const App = (props) => {
       setFilterValue('')
       setPersons(persons.filter(p => p.id !== Number(id)))
       setPersonsToShow(persons.filter(p => p.id !== Number(id)))
-      setAddedMessage(`${personToRemove.name} was deleted, status: ${response}`)
+      setSuccessMessage(`${personToRemove.name} was deleted, status: ${response}`)
           setTimeout(() => {
-            setAddedMessage(null)
+            setSuccessMessage(null)
           }, 2500)
     })
     .catch(error => {
-      setDeletedMessage(
+      setErrorMessage(
         `${personToRemove.name} was already removed from server, status: ${error.response.status}`
       )
       setTimeout(() => {
-        setDeletedMessage(null)
+        setErrorMessage(null)
       }, 2500)
       setPersons(persons.filter(p => p.id !== personToRemove.id))
       setPersonsToShow(persons.filter(p => p.id !== personToRemove.id))
@@ -133,8 +133,8 @@ const App = (props) => {
   return (
     <div className="wrapper">
       <h1>Phonebook</h1>
-      <Notification message={addedMessage} cssSelector = 'added' />
-      <Notification message={deletedMessage} cssSelector = 'deleted' />
+      <Notification message={successMessage} cssSelector = 'notification' />
+      <Notification message={errorMessage} cssSelector = 'error' />
       <div>Filter persons
         <input
           value={filterValue} 
