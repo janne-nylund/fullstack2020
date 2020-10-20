@@ -129,6 +129,7 @@ const App = (props) => {
     setFilterValue(searchString)
     setPersonsToShow(persons.filter(person => person.name.toLowerCase().includes(searchString.toLowerCase())))
   }
+  
 
   return (
     <div className="wrapper">
