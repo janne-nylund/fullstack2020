@@ -1,6 +1,6 @@
 const _ = require('lodash')
-const array = require('lodash/array')
-const object = require('lodash/fp/object')
+//const array = require('lodash/array')
+//const object = require('lodash/fp/object')
 
 const dummy = () => {
   return 1
@@ -48,16 +48,18 @@ const mostBlogs = array => {
 }
 
 const mostLikes = array => {
-  var result = _(array)
-    .countBy('author')
-    .entries('title')
-    .maxBy(_.last)
+  const authorLikes = array.reduce((op, { author, likes }) => {
+    op[author] = op[author] || 0
+    op[author] += likes
+    return op
+  },{})
+  const mostLikesArray = Object.keys(authorLikes).sort((a,b) => authorLikes[b] - authorLikes[a])[0]
 
   return array.length === 0
     ? { author: 'No blogs found' }
     : {
-      'author': result[0],
-      'blogs': result[1]
+      'author': mostLikesArray,
+      'likes': authorLikes[mostLikesArray]
     }
 }
 
