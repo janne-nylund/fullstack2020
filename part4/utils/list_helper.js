@@ -1,3 +1,7 @@
+const _ = require('lodash')
+const array = require('lodash/array')
+const object = require('lodash/fp/object')
+
 const dummy = () => {
   return 1
 }
@@ -19,14 +23,7 @@ const favoriteBlog = array => {
 
   const mostLikes = array.reduce(reducer, 0)
   const blog = array.find(item => item.likes === mostLikes)
-  /* console.log(array.length === 0
-    ? { author: 'No blogs found' }
-    : {
-      'title': blog.title,
-      'author': blog.author,
-      'likes': blog.likes
-    }
-  ) */
+
   return array.length === 0
     ? { author: 'No blogs found' }
     : {
@@ -36,8 +33,38 @@ const favoriteBlog = array => {
     }
 }
 
+const mostBlogs = array => {
+  var result = _(array)
+    .countBy('author')
+    .entries('title')
+    .maxBy(_.last)
+
+  return array.length === 0
+    ? { author: 'No blogs found' }
+    : {
+      'author': result[0],
+      'blogs': result[1]
+    }
+}
+
+const mostLikes = array => {
+  var result = _(array)
+    .countBy('author')
+    .entries('title')
+    .maxBy(_.last)
+
+  return array.length === 0
+    ? { author: 'No blogs found' }
+    : {
+      'author': result[0],
+      'blogs': result[1]
+    }
+}
+
 module.exports = {
   dummy,
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs,
+  mostLikes
 }
