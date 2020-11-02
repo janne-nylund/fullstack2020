@@ -86,6 +86,66 @@ test('correct amount of blogs are returned as json', async () => {
   expect(response.body).toHaveLength(helper.initialBlogs.length)
 })
 
+test('unique identifier is named id', async () => {
+  const response = await api.get('/api/blogs')
+  expect(response.body[0].id).toBeDefined()
+})
+
+test('a blog can be added', async () => {
+  const newBlog = {
+    title: 'Title of a test blog',
+    author: 'John Tester',
+    url: 'www.test.com',
+    likes: 10
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+  const contents = blogsAtEnd.map(b => b.title)
+
+  expect(contents).toContain(
+    'Title of a test blog'
+  )
+})
+
+test('a blog with no likes has zero likes', async () => {
+  const newBlog = {
+    title: 'Title of a test blog',
+    author: 'John Tester',
+    url: 'www.test.com'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd[2].likes).toEqual(0)
+})
+
+test('blog without title or url is not added', async () => {
+  const newBlog = {
+    author: 'John Tester',
+    likes: 10
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
