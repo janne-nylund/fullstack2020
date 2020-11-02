@@ -128,7 +128,7 @@ test('a blog with no likes has zero likes', async () => {
     .expect('Content-Type', /application\/json/)
 
   const blogsAtEnd = await helper.blogsInDb()
-  expect(blogsAtEnd[2].likes).toEqual(0)
+  expect(blogsAtEnd[2].likes).toBe(0)
 })
 
 test('blog without title or url is not added', async () => {
