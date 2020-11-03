@@ -34,7 +34,7 @@ const favoriteBlog = array => {
 }
 
 const mostBlogs = array => {
-  var result = _(array)
+  const result = _(array)
     .countBy('author')
     .entries('title')
     .maxBy(_.last)
