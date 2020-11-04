@@ -7,86 +7,103 @@ const Blog = require('../models/blog')
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 
-beforeEach(async () => {
-  await Blog.deleteMany({})
+describe('BLOG TESTS - when there is initially two blogs in db', () => {
+  beforeEach(async () => {
+    await Blog.deleteMany({})
 
-  const blogObjects = helper.initialBlogs
-    .map(blog => new Blog(blog))
-  const promiseArray = blogObjects.map(blog => blog.save())
-  await Promise.all(promiseArray)
+    const blogObjects = helper.initialBlogs
+      .map(blog => new Blog(blog))
+    const promiseArray = blogObjects.map(blog => blog.save())
+    await Promise.all(promiseArray)
+  })
+
+  test('4.8 - correct amount of blogs are returned as json', async () => {
+    await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/blogs')
+    expect(response.body).toHaveLength(helper.initialBlogs.length)
+  })
+
+  test('4.9 - unique identifier is named id', async () => {
+    const response = await api.get('/api/blogs')
+    expect(response.body[0].id).toBeDefined()
+  })
+
+  test('4.10 - a blog can be added', async () => {
+    const newBlog = {
+      title: 'Title of a test blog',
+      author: 'John Tester',
+      url: 'www.test.com',
+      likes: 10
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+    const contents = blogsAtEnd.map(b => b.title)
+
+    expect(contents).toContain(
+      'Title of a test blog'
+    )
+  })
+
+  test('4.11 - a blog with no likes has zero likes', async () => {
+    const newBlog = {
+      title: 'Title of a test blog',
+      author: 'John Tester',
+      url: 'www.test.com'
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd[2].likes).toBe(0)
+  })
+
+  test('4.12 - blog without a title is not added', async () => {
+    const newBlog = {
+      url: 'www.test.com',
+      author: 'John Tester',
+      likes: 10
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+  })
+  test('4.12 - blog without an url is not added', async () => {
+    const newBlog = {
+      title: 'Test blog',
+      author: 'John Tester',
+      likes: 10
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+  })
 })
-
-test('correct amount of blogs are returned as json', async () => {
-  await api
-    .get('/api/blogs')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
-
-  const response = await api.get('/api/blogs')
-  expect(response.body).toHaveLength(helper.initialBlogs.length)
-})
-
-test('unique identifier is named id', async () => {
-  const response = await api.get('/api/blogs')
-  expect(response.body[0].id).toBeDefined()
-})
-
-test('a blog can be added', async () => {
-  const newBlog = {
-    title: 'Title of a test blog',
-    author: 'John Tester',
-    url: 'www.test.com',
-    likes: 10
-  }
-
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
-
-  const blogsAtEnd = await helper.blogsInDb()
-  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
-  const contents = blogsAtEnd.map(b => b.title)
-
-  expect(contents).toContain(
-    'Title of a test blog'
-  )
-})
-
-test('a blog with no likes has zero likes', async () => {
-  const newBlog = {
-    title: 'Title of a test blog',
-    author: 'John Tester',
-    url: 'www.test.com'
-  }
-
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
-
-  const blogsAtEnd = await helper.blogsInDb()
-  expect(blogsAtEnd[2].likes).toBe(0)
-})
-
-test('blog without title or url is not added', async () => {
-  const newBlog = {
-    author: 'John Tester',
-    likes: 10
-  }
-
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(400)
-
-  const blogsAtEnd = await helper.blogsInDb()
-  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
-})
-
-describe('when there is initially one user in db', () => {
+describe('4.16 USER TESTS - when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
