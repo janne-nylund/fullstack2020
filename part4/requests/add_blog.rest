@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpueWx1bmQiLCJpZCI6IjVmYTEzYTU3ZDY5MGIzNzQxOGM2ZTM4MSIsImlhdCI6MTYwNDUxNDkzOH0.V_NOs6xSZbQLyBojJzPqgsLAmmX4yQG29tfvaoGUCeM
 
 {
-    "title": "Testing a blog post with the second user as creator",
-    "author": "Michael Write",
-    "url": "www.blogs.com/3/",
-    "likes": 9
+    "title": "Test a fifth blog with token authentication",
+    "author": "Random Writer 3",
+    "url": "www.blogs.com/10/",
+    "likes": 5
 }
