@@ -1,7 +1,7 @@
 import React from 'react'
 const Blog = ({ blog }) => (
   <div>
-    <h4>{blog.title}</h4>
+    <p className='blogTitle'>{blog.title}</p>
     <b>Author: </b>{blog.author}<br/>
     <b>Url: </b>{blog.url}<br/> 
     <b>Likes: </b>{blog.likes}<br/>
