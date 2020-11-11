@@ -93,6 +93,7 @@ const App = () => {
       .then(returnedBlog => {
         const updatedBlog = blogs.map(blog => blog.id !== selectedBlog.id ? blog : returnedBlog)
         setBlogs(updatedBlog)
+        //this hacky solution works
         blogService.getAll().then(blogs =>
           setBlogs( blogs )
         ) 
