@@ -92,16 +92,12 @@ const App = () => {
     blogService
       .update(id, changedBlog)
       .then(returnedBlog => {
-        const updatedBlog = blogs.map(blog => blog.id !== selectedBlog.id ? blog : returnedBlog)
-        setBlogs(updatedBlog)
-        //this hacky solution works
-        blogService.getAll().then(blogs =>
-          setBlogs( blogs )
-        )
-        setSuccessMessage(`Like added to: ${returnedBlog.title}, by ${returnedBlog.author}`)
+        returnedBlog.user = selectedBlog.user
+        setBlogs(blogs.map(blog => blog.id !== selectedBlog.id ? blog : returnedBlog))    
+        /* setSuccessMessage(`Like added to: ${returnedBlog.title}, by ${returnedBlog.author}`)
           setTimeout(() => {
             setSuccessMessage(null)
-          }, 2500)
+          }, 2500) */
       })
       .catch(error => {
         setErrorMessage(
