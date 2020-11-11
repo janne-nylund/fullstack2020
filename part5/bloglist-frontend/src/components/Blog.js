@@ -7,13 +7,15 @@ const hideWhenView = { display: showInfo ? 'none' : '' }
 const showWhenView = { display: showInfo ? '' : 'none' }
 
 const blogStyle = {
-  paddingTop: 10,
+  paddingTop: 5,
+  paddingBottom: 10,
   paddingLeft: 10,
   border: 'solid',
   borderWidth: 1,
   marginBottom: 5,
   marginRight: 10,
-  marginTop: 10
+  marginTop: 10,
+  lineHeight: 1.6
 }
 
 const showRemoveButton = ()=>{
@@ -35,8 +37,8 @@ return(
     <b>Author: </b>{blog.author}<br/>
     <b>Url: </b>{blog.url}<br/> 
     <b>Likes: </b>{blog.likes} <button onClick={addLike}>like</button><br/>
-    <b>Created by: </b>{blog.user.name}<br/><br/>
-    {showRemoveButton()}
+    <b>Created by: </b>{blog.user.name}<br/>
+    {showRemoveButton()}<br/>
   </div>
 
   </div>
