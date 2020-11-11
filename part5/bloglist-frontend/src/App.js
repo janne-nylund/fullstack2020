@@ -54,7 +54,7 @@ const App = () => {
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
-      }, 5000)
+      }, 2500)
     }
   }
 
@@ -97,7 +97,11 @@ const App = () => {
         //this hacky solution works
         blogService.getAll().then(blogs =>
           setBlogs( blogs )
-        ) 
+        )
+        setSuccessMessage(`Like added to: ${returnedBlog.title}, by ${returnedBlog.author}`)
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 2500)
       })
       .catch(error => {
         setErrorMessage(
@@ -153,7 +157,7 @@ const App = () => {
         handleSubmit={handleLogin}
       />
   )
-  
+
   const blogForm = () => (
     <Togglable buttonLabel='create new blog' ref={blogFormRef}>
       <BlogForm createBlog={addBlog} />
