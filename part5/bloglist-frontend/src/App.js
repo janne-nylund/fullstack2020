@@ -175,7 +175,7 @@ const App = () => {
 
   const showBlogs = () => (
     <div>
-      <p>{user.name} logged-in<input type='button' value='logout' onClick={logOut}/></p>
+      <p>{user.name} logged in<input type='button' value='logout' onClick={logOut}/></p>
        <div>{blogForm()} </div>
         <>
         {blogs.sort(sortByLike).map(blog =>
