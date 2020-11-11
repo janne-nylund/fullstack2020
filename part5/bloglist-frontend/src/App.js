@@ -44,6 +44,10 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      setSuccessMessage(`${user.name} logged in`)
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 2500)
     } catch (exception) {
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
@@ -125,7 +129,7 @@ const App = () => {
   )
 
   const logOut = () => {
-    setSuccessMessage(`${user.username} logged out`)
+    setSuccessMessage(`${user.name} logged out`)
           setTimeout(() => {
             setSuccessMessage(null)
           }, 2500)
@@ -169,7 +173,8 @@ const App = () => {
     </form>  
         <>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog}/>
+          // <Blog key={blog.id} blog={blog} user={user}/>
         )}
         </>
       </div>
