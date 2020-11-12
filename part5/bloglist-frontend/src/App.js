@@ -161,22 +161,13 @@ const App = () => {
   )
 
   const sortByLike = (a, b) => {
-      const blogA = a.likes;
-      const blogB = b.likes;
-    
-      let comparison = 0;
-      if (blogA < blogB) {
-        comparison = 1;
-      } else if (blogA > blogB) {
-        comparison = -1;
-      }
-      return comparison;
-    }
+      return b.likes - a.likes 
+  }
 
   const showBlogs = () => (
     <div>
       <p>{user.name} logged in<input type='button' value='logout' onClick={logOut}/></p>
-       <div>{blogForm()} </div>
+       <div>{blogForm()}</div>
         <>
         {blogs.sort(sortByLike).map(blog =>
           <Blog 
@@ -188,7 +179,7 @@ const App = () => {
           />
         )}
         </>
-      </div>
+    </div>
   )
 
   return (

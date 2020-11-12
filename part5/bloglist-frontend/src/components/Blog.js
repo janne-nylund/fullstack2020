@@ -11,11 +11,13 @@ const blogStyle = {
   paddingBottom: 10,
   paddingLeft: 10,
   border: 'solid',
+  borderColor: '#d2d2d2',
   borderWidth: 1,
   marginBottom: 5,
   marginRight: 10,
   marginTop: 10,
-  lineHeight: 1.6
+  lineHeight: 1.6,
+  backgroundColor: '#eeeeee'
 }
 
 const showRemoveButton = ()=>{
@@ -31,6 +33,7 @@ return(
 
   <div style={hideWhenView}>
     <p className='blogTitle'>{blog.title} <button onClick={() => setShowInfo(true)}>view</button></p>
+    <b>Author: </b>{blog.author}<br/>
   </div>
   <div style={showWhenView}>
     <p className='blogTitle'>{blog.title} <button onClick={() => setShowInfo(false)}>hide</button></p>
