@@ -29,10 +29,10 @@ const remove = id => {
   const config = {
     headers: { Authorization: token },
   }
-  
+
   const request = axios.delete(`${baseUrl}/${id}`, config)
   return request.then(response => response.status)
 }
 
-// eslint-disable-next-line 
+// eslint-disable-next-line
 export default {  setToken, getAll, create, update, remove  }
