@@ -29,13 +29,13 @@ const Blog = ({ blog, addLike, user, removeBlog }) => {
   }
 
   return(
-    <div style={blogStyle}>
+    <div style={blogStyle} className='blog'>
 
-      <div style={hideWhenView}>
+      <div style={hideWhenView} className='default'>
         <p className='blogTitle'>{blog.title} <button onClick={() => setShowInfo(true)}>view</button></p>
         <b>Author: </b>{blog.author}<br/>
       </div>
-      <div style={showWhenView}>
+      <div style={showWhenView} className='onView'>
         <p className='blogTitle'>{blog.title} <button onClick={() => setShowInfo(false)}>hide</button></p>
         <b>Author: </b>{blog.author}<br/>
         <b>Url: </b>{blog.url}<br/>

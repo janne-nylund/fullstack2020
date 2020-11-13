@@ -34,5 +34,4 @@ const remove = id => {
   return request.then(response => response.status)
 }
 
-// eslint-disable-next-line
 export default {  setToken, getAll, create, update, remove  }
