@@ -39,7 +39,7 @@ const Blog = ({ blog, addLike, user, removeBlog }) => {
         <p className='blogTitle'>{blog.title} <button onClick={() => setShowInfo(false)}>hide</button></p>
         <b>Author: </b>{blog.author}<br/>
         <b>Url: </b>{blog.url}<br/>
-        <b>Likes: </b>{blog.likes} <button onClick={addLike}>like</button><br/>
+        <b className='likes'>Likes: </b>{blog.likes} <button onClick={addLike}>like</button><br/>
         <b>Created by: </b>{blog.user.name}<br/>
         {showRemoveButton()}<br/>
       </div>
