@@ -2,7 +2,7 @@
   "anecdotes": [
     {
       "content": "If it hurts, do it more often",
-      "votes": 20,
+      "votes": 21,
       "id": 1
     },
     {
@@ -29,6 +29,11 @@
       "content": "Hoppla, is an anecdote",
       "votes": 3,
       "id": 6
+    },
+    {
+      "content": "LASTING DOSE",
+      "votes": 22,
+      "id": 7
     }
   ]
 }
