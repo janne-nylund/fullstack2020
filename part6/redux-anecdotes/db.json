@@ -32,13 +32,18 @@
     },
     {
       "content": "LASTING DOSE",
-      "votes": 22,
+      "votes": 23,
       "id": 7
     },
     {
       "content": "Last test for this part",
       "votes": 4,
       "id": 8
+    },
+    {
+      "content": "And one more",
+      "votes": 1,
+      "id": 9
     }
   ]
 }

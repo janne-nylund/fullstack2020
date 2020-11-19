@@ -28,7 +28,7 @@ const AnecdoteList = (props) => {
   
   return (
     <div>
-      {sortedByVotes(filterByInput(props.filter, props.anecdotes)).map(anecdote =>
+      {sortedByVotes(filterByInput(props.filterTerm, props.anecdotesList)).map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
@@ -45,7 +45,7 @@ const AnecdoteList = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    anecdotes: state.anecdotes, filter: state.filter,
+    anecdotesList: state.anecdotesList, filterTerm: state.filterTerm,
   }
 }
 

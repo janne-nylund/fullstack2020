@@ -6,8 +6,8 @@ import filterReducer from './reducers/filterReducer'
 import thunk from 'redux-thunk'
 
 const reducer = combineReducers({
-  anecdotes: anecdoteReducer,
-  filter: filterReducer,
+  anecdotesList: anecdoteReducer,
+  filterTerm: filterReducer,
   notification: notificationReducer
 })
 
