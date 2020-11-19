@@ -6,12 +6,13 @@ import { setNotifications } from '../reducers/notificationReducer'
 const AnecdoteList = (props) => {
   
   const sortedByVotes = (anecdotes) => {
-    return anecdotes.sort((a, b) => b.votes - a.votes)
+    return anecdotes.sort((first, second) => 
+    second.votes - first.votes)
   }
 
-  const filterByInput = (filter, anecdotes) => {
-    const filtered = anecdotes.filter(a => a.content.toLowerCase().includes(filter.toLowerCase()))
-    return filtered
+  const filterByInput = (lookFor, anecToFilter) => {
+    const filterResult = anecToFilter.filter(anecdote => anecdote.content.toLowerCase().includes(lookFor.toLowerCase()))
+    return filterResult
   }
 
   const voting = (id, anecdote) => {
