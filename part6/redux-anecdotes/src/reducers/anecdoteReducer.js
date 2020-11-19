@@ -31,7 +31,7 @@ export const initialAnec = () => {
   }
 }
 
-export const createAnec = (content) => {
+export const createAnec = content => {
   return async dispatch => {
     const newAnec = await anecdoteService.createNew(content)
     dispatch({

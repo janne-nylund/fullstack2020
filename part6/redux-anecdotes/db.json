@@ -49,6 +49,11 @@
       "content": "Yo, MTV raps!",
       "votes": 1,
       "id": 10
+    },
+    {
+      "content": "Ihan jepa!",
+      "votes": 0,
+      "id": 11
     }
   ]
 }
