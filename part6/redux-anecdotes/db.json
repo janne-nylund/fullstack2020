@@ -2,7 +2,7 @@
   "anecdotes": [
     {
       "content": "If it hurts, do it more often",
-      "votes": 11,
+      "votes": 12,
       "id": 1
     },
     {
@@ -17,8 +17,13 @@
     },
     {
       "content": "Last in line, this is it",
-      "votes": 4,
+      "votes": 5,
       "id": 4
+    },
+    {
+      "content": "Hauki on kala, on se",
+      "votes": 2,
+      "id": 5
     }
   ]
 }

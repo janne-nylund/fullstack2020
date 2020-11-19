@@ -1,17 +1,17 @@
-const filterReducer = (state = '', action) => {
+const reducer = (state = '', action) => {
   switch (action.type) {
-    case 'FILTER':
-      return action.filter
+    case 'FILTER_ANECDOTES':
+      return action.search
     default:
       return state
     }
   }
   
-  export const filterChange = (filter) => {
+  export const changeFilter = (search) => {
     return {
-      type: 'FILTER',
-      filter,
+      type: 'FILTER_ANECDOTES',
+      search,
     }
   }
   
-  export default filterReducer
+  export default reducer

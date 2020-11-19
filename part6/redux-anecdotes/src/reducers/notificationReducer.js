@@ -12,11 +12,11 @@ const notificationReducer = (state = initialState, action) => {
 }
 
 let timer = 0
-export const setNotifications = (notification, seconds) => {
+export const setNotifications = (toShow, seconds) => {
   return dispatch => {
     dispatch({
       type: 'NOTIFICATION',
-      data: notification
+      data: toShow
     })
     clearTimeout(timer)
     timer = setTimeout(() => {
