@@ -19,6 +19,5 @@ const FilterAnecdotes = (props) => {
   )
 }
 
-const mapStateToProps = (state) => { return { filter: state.filter } }
 const mapDispatchToProps = { changeFilter }
-export default connect(mapStateToProps, mapDispatchToProps)(FilterAnecdotes)
+export default connect(null, mapDispatchToProps)(FilterAnecdotes)

@@ -2,7 +2,7 @@
   "anecdotes": [
     {
       "content": "If it hurts, do it more often",
-      "votes": 21,
+      "votes": 22,
       "id": 1
     },
     {
@@ -32,7 +32,7 @@
     },
     {
       "content": "LASTING DOSE",
-      "votes": 23,
+      "votes": 24,
       "id": 7
     },
     {
@@ -44,6 +44,11 @@
       "content": "And one more",
       "votes": 1,
       "id": 9
+    },
+    {
+      "content": "Yo, MTV raps!",
+      "votes": 1,
+      "id": 10
     }
   ]
 }

@@ -43,15 +43,9 @@ const AnecdoteList = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    anecdotesList: state.anecdotesList, filterTerm: state.filterTerm,
-  }
-}
+const mapStateToProps = (state) => { return { anecdotesList: state.anecdotesList, filterTerm: state.filterTerm } }
 
-const mapDispatchToProps = {
-  voteOn, setNotifications
-}
+const mapDispatchToProps = { voteOn, setNotifications }
 
 const ConnectedAnecdoteList = connect(mapStateToProps, mapDispatchToProps)(AnecdoteList)
 export default ConnectedAnecdoteList
