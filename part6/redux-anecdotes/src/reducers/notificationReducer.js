@@ -1,4 +1,4 @@
-const reducer = (state = '', action) => {
+const notificationReducer = (state = '', action) => {
   switch(action.type){
     case 'NOTIFICATION':
       return action.data
@@ -7,11 +7,11 @@ const reducer = (state = '', action) => {
   }
 }
 
-export const setNotification = (notification) => {
+export const setNotifications = (notification) => {
   return {
     type: 'NOTIFICATION',
     data: notification
   }
 }
 
-export default reducer
+export default notificationReducer
