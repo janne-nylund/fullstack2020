@@ -6,11 +6,13 @@ const Notification = () => {
   const style = {
     border: 'solid',
     padding: 10,
+    color: 'green',
     borderWidth: 1,
-    marginBottom: 10
+    marginBottom: 10,
+    fontSize: 20
   }
   if( notification === ''){
-    return null
+    return (<></>)
   } else {
     return (
       <div style={style}>{notification}</div>
