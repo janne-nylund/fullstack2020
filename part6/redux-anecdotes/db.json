@@ -22,7 +22,7 @@
     },
     {
       "content": "Hauki on kala, on se",
-      "votes": 2,
+      "votes": 6,
       "id": 5
     },
     {
@@ -34,6 +34,11 @@
       "content": "LASTING DOSE",
       "votes": 22,
       "id": 7
+    },
+    {
+      "content": "Last test for this part",
+      "votes": 4,
+      "id": 8
     }
   ]
 }
