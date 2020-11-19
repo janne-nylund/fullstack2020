@@ -1,17 +1,17 @@
 const initialState = ''
-let timer = 0
 
 const notificationReducer = (state = initialState, action) => {
   switch(action.type){
     case 'NOTIFICATION':
       return action.data
-    case 'CLEAR':
+    case 'RESET':
       return initialState
     default:
       return state
   }
 }
 
+let timer = 0
 export const setNotifications = (notification, seconds) => {
   return dispatch => {
     dispatch({
@@ -21,7 +21,7 @@ export const setNotifications = (notification, seconds) => {
     clearTimeout(timer)
     timer = setTimeout(() => {
       dispatch({
-        type: 'CLEAR'
+        type: 'RESET'
       })
     }, seconds * 1000)
   }
