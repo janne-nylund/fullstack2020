@@ -10,7 +10,7 @@ const Notification = () => {
     marginBottom: 10
   }
   if( notification === ''){
-    return <div></div>
+    return null
   } else {
     return (
       <div style={style}>{notification}</div>

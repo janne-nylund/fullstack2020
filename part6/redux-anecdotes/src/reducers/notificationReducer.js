@@ -1,4 +1,5 @@
 const initialState = ''
+let timer = 0
 
 const notificationReducer = (state = initialState, action) => {
   switch(action.type){
@@ -11,28 +12,18 @@ const notificationReducer = (state = initialState, action) => {
   }
 }
 
-/* export const setNotifications = (notification) => {
-  return {
-    type: 'NOTIFICATION',
-    data: notification
-  }
-} */
-
-export const setNotifications = (notification, time) => {
+export const setNotifications = (notification, seconds) => {
   return dispatch => {
     dispatch({
       type: 'NOTIFICATION',
       data: notification
     })
-    setTimeout(() => {
-      dispatch(clearNotifications())
-    }, time * 1000)
-  }
-}
-
-export const clearNotifications = () => {
-  return {
-    type: 'CLEAR'
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      dispatch({
+        type: 'CLEAR'
+      })
+    }, seconds * 1000)
   }
 }
 

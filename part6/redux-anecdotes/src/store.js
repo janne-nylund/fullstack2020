@@ -6,14 +6,16 @@ import filterReducer from './reducers/filterReducer'
 import thunk from 'redux-thunk'
 
 const reducer = combineReducers({
-    anecdotes: anecdoteReducer,
-    notification: notificationReducer,
-    filter: filterReducer
+  anecdotes: anecdoteReducer,
+  filter: filterReducer,
+  notification: notificationReducer
 })
 
 const store = createStore(
-    reducer,
-    composeWithDevTools(applyMiddleware(thunk))
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  )
 )
 
 export default store

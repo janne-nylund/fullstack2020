@@ -21,42 +21,6 @@ const anecdoteReducer = (state = [], action) => {
     }
 }
 
-/* export const createAnecdote = (content) => {
-  return {
-    type: 'NEW_ANECDOTE',
-    data: content
-  }
-} */
-
-export const createAnecdote = content => {
-  return async dispatch => {
-    const newAnecdote = await anecdoteService.createNew(content)
-    dispatch({
-      type: 'NEW_ANECDOTE',
-      data: newAnecdote
-    })
-  }
-}
-
-/* export const voteOn = (id) => {
-  return {
-    type: 'VOTE',
-    data: { id }
-  }
-} */
-
-export const voteOn = (id, anecdote) => {
-  return async dispatch => {
-    anecdote.votes = anecdote.votes + 1
-    const updateVotes = await anecdoteService.update(id, anecdote)
-    dispatch({
-      type: 'VOTE',
-      data: updateVotes
-    })
-  }
-}
-
-
 export const initialAnec = () => {
   return async dispatch => {
     const anecdotes = await anecdoteService.getAll()
@@ -67,11 +31,25 @@ export const initialAnec = () => {
   }
 }
 
-/* export const initialAnec = (anecdotes) => {
-  return {
-    type: 'INITIAL',
-    data: anecdotes
+export const createAnec = (content) => {
+  return async dispatch => {
+    const newAnec = await anecdoteService.createNew(content)
+    dispatch({
+      type: 'NEW_ANECDOTE',
+      data: newAnec
+    })
   }
-} */
+}
+
+export const voteOn = (id, anecdote) => {
+  return async dispatch => {
+    anecdote.votes = anecdote.votes + 1
+    const updateVote = await anecdoteService.update(id, anecdote)
+    dispatch({
+      type: 'VOTE',
+      data: updateVote
+    })
+  }
+}
 
 export default anecdoteReducer
