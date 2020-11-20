@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link, useParams
+  Switch, Route, Link, useParams, useHistory
 } from "react-router-dom"
 
 
@@ -41,7 +41,8 @@ const CreateNew = (props) => {
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
 
-
+  const history = useHistory()
+    
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addNew({
@@ -50,6 +51,7 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    history.push('/')
   }
 
   return (
@@ -68,7 +70,7 @@ const CreateNew = (props) => {
           url for more info
           <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
         </div>
-        <button>create</button>
+        <button type='submit'>create</button>
       </form>
     </div>
   )
@@ -94,10 +96,14 @@ const App = () => {
   ])
 
   const [notification, setNotification] = useState('')
-
+  
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`A new anecdote ${anecdote.content} created!`)
+    setTimeout(() => {
+      setNotification('')
+    }, 10000)
   }
 
   const anecdoteById = (id) =>
@@ -126,7 +132,7 @@ const App = () => {
     const anecdote = anecdoteById(id) 
     return (
       <div style={listEnd}>
-        <h2>{anecdote.content} by{anecdote.author} </h2>
+        <h2>{anecdote.content} by {anecdote.author} </h2>
         <div style={listStyling}>has {anecdote.votes} votes</div>
         <div style={listStyling}>for more info see <a href={` ${anecdote.info} `}>{anecdote.info}</a> </div>
       </div>
@@ -136,7 +142,7 @@ const App = () => {
   const padding = {
     padding: 5
   }
-  
+
   return (
     <div>
       <h1>Software anecdotes</h1>
@@ -146,7 +152,7 @@ const App = () => {
         <Link style={padding} to="/create">create new</Link>
         <Link style={padding} to="/about">about</Link>
       </div>
-
+      <div style={padding}>{notification}</div>
       <Switch>
         <Route path="/anecdotes/:id">
           <Anecdote anecdotes={anecdotes} />
