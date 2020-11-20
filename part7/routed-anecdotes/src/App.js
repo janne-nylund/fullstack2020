@@ -38,9 +38,9 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
-  const content = useField('text')
-  const author = useField('text')
-  const info = useField('text')
+  const {reset: contentReset, ...content} = useField('text')
+  const {reset: authorReset, ...author} = useField('text')
+  const {reset: infoReset, ...info} = useField('text')
 
   const history = useHistory()
     
@@ -56,14 +56,9 @@ const CreateNew = (props) => {
   }
 
   const handleReset = () => {
-      content.reset()
-      author.reset()
-      info.reset()
-  }
-  
-  const inputField = (object) => {
-    const { reset, ...passedValue } = object
-    return passedValue
+      contentReset()
+      authorReset()
+      infoReset()
   }
 
   return (
@@ -71,13 +66,13 @@ const CreateNew = (props) => {
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit} onReset={handleReset}>
         content 
-        <input {...inputField(content)} /> 
+        <input {...content} /> 
         <br/> 
         author
-        <input {...inputField(author)} />
+        <input {...author} />
         <br /> 
         url for more info
-        <input {...inputField(info)} />
+        <input {...info} />
         <br /> 
         <button type='submit'>create</button><button type='reset'>reset</button>
       </form>
