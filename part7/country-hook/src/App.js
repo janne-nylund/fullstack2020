@@ -26,13 +26,10 @@ const useCountry = (name) => {
           setCountry({data: {...response.data[0] },found: true })
         })
         .catch(() => {
-          setCountry({
-            found: false
-          })
+          setCountry({ found: false })
         })
   }, [name])
     
-
   return country
 }
 
