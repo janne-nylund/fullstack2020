@@ -6,16 +6,21 @@ import Notification from './components/Notification'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
+import { useDispatch } from 'react-redux'
+import { setNotification } from './reducers/notificationReducer'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [successMessage, setSuccessMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
+  /*  const [successMessage, setSuccessMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null) */
+  //const [notification, setNotification] = useState(null)
 
   const blogFormRef = React.createRef()
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -32,6 +37,13 @@ const App = () => {
     }
   }, [])
 
+  const notifyWith = (message, type='success') => {
+    const notificationObj = { message, type }
+    dispatch(setNotification(
+      notificationObj, 5
+    ))
+  }
+
   const handleLogin = async (event) => {
     event.preventDefault()
 
@@ -46,15 +58,9 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-      setSuccessMessage(`${user.name} logged in`)
-      setTimeout(() => {
-        setSuccessMessage(null)
-      }, 2500)
+      notifyWith(`${user.name} welcome back!`)
     } catch (exception) {
-      setErrorMessage('Wrong username or password')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 2500)
+      notifyWith('Wrong username/password!', 'error')
     }
   }
 
@@ -64,18 +70,11 @@ const App = () => {
       .create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
-        setSuccessMessage(`New blog: ${returnedBlog.title}, by ${returnedBlog.author}`)
-        setTimeout(() => {
-          setSuccessMessage(null)
-        }, 2500)
+        notifyWith(`New blog: ${returnedBlog.title}, by ${returnedBlog.author}`)
       })
       .catch(error => {
-        setErrorMessage(
-          'Error adding blog: ' + error
-        )
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 2500)
+        notifyWith('Error adding blog: ' + error)
+        console.log(error)
       })
   }
 
@@ -100,12 +99,7 @@ const App = () => {
           }, 2500) */
       })
       .catch(error => {
-        setErrorMessage(
-          'Error updating blog: ' + error
-        )
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 2500)
+        console.log(error)
       })
 
 
@@ -118,29 +112,17 @@ const App = () => {
         .remove(id)
         .then( () => {
           setBlogs(blogs.filter(b => b.id !== id))
-          setSuccessMessage(`Blog "${blogToRemove.title}" was removed`)
-          setTimeout(() => {
-            setSuccessMessage(null)
-          }, 2500)
+          notifyWith(`Blog "${blogToRemove.title}" was removed`)
         })
-        .catch(error => {
-          setErrorMessage(
-            'Error removing blog: ' + error
-          )
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 2500)
+        .catch((error) => {
+          notifyWith('Error removing blog: ' + error)
+          console.log(error)
         })
     }
   }
 
-
-
   const logOut = () => {
-    setSuccessMessage(`${user.name} logged out`)
-    setTimeout(() => {
-      setSuccessMessage(null)
-    }, 2500)
+    notifyWith(`${user.name} logged out`)
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
   }
@@ -185,8 +167,7 @@ const App = () => {
   return (
     <div>
       <h1>BLOGS</h1>
-      <Notification message={successMessage} cssSelector = 'notification' />
-      <Notification message={errorMessage} cssSelector = 'error' />
+      <Notification />
       {user === null ?
         loginForm() :
         showBlogs()
