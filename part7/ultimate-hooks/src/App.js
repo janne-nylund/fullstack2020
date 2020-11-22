@@ -44,6 +44,7 @@ const App = () => {
     event.target.value = ''
     content.onChange(event)
   }
+
   const handlePersonSubmit = (event) => {
     event.preventDefault()
     personService.create({ name: name.value, number: number.value })
@@ -51,6 +52,7 @@ const App = () => {
     name.onChange(event)
     number.onChange(event)
   }
+  
   return (
     <div>
       <h2>notes</h2>
