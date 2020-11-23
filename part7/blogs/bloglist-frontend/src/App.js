@@ -9,12 +9,18 @@ import Togglable from './components/Togglable'
 import { useDispatch } from 'react-redux'
 import { setNotification } from './reducers/notificationReducer'
 
-import { Button } from 'react-bootstrap'
+import {
+  BrowserRouter as Router,
+  Switch, Route, Link
+} from 'react-router-dom'
+
+import { Table, Button } from 'react-bootstrap'
 // import { Table, Form, Button } from 'react-bootstrap'
 
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [users, setUsers] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -29,6 +35,12 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
+    )
+  }, [])
+
+  useEffect(() => {
+    blogService.getAllUsers().then(users =>
+      setUsers( users )
     )
   }, [])
 
@@ -129,6 +141,7 @@ const App = () => {
     notifyWith(`${user.name} logged out`)
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
+    window.location = 'http://localhost:3000/'
   }
   const loginForm = () => (
     <LoginForm
@@ -150,10 +163,27 @@ const App = () => {
     return b.likes - a.likes
   }
 
+  const sortByBlogs = (a, b) => {
+    return b.blogs.length - a.blogs.length
+  }
+
+  const padding = {
+    padding: 5,
+    marginTop: 10,
+    marginRight: 15
+  }
+  const paddingButton = {
+    padding: 5,
+    marginTop: 10
+  }
+
   const showBlogs = () => (
     <div className="container">
+      <Link style={padding} to="/"><b>HOME</b></Link>
+      <Link style={padding} to="/users"><b>USERS</b></Link>
+      {user.name} logged in <Button style={paddingButton} variant="primary" onClick={logOut}>logout</Button>
+
       <h1>BLOGS</h1>
-      <p>{user.name} logged in <Button variant="primary" onClick={logOut}>logout</Button></p>
       <div>{blogForm()}</div>
       <>
         {blogs.sort(sortByLike).map(blog =>
@@ -168,14 +198,62 @@ const App = () => {
       </>
     </div>
   )
+  const UsersList = () => (
+    <div>
+      <Table striped>
+        <tbody>
+          <tr><td><b>name</b></td><td><b>blogs created</b></td></tr>
+          {users.sort(sortByBlogs).map(user =>
+            <tr key={user.id}>
+              <td>{user.name}</td><td>{user.blogs.length}</td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
+    </div>
+  )
+
+  const showUsers = () => (
+    <div className="container">
+      <Link style={padding} to="/"><b>HOME</b></Link>
+      <Link style={padding} to="/users"><b>USERS</b></Link>
+      {user.name} logged in <Button style={paddingButton} variant="primary" onClick={logOut}>logout</Button>
+
+      <h1>BLOGS</h1>
+      <h3>USERS</h3>
+      <UsersList />
+    </div>
+  )
+
+  const Users = () => (
+    <div>
+      {user === null ?
+        loginForm() :
+        showUsers()
+      }
+    </div>
+  )
 
   return (
     <div className="container">
-      <Notification />
-      {user === null ?
-        loginForm() :
-        showBlogs()
-      }
+
+
+      <Router>
+
+        <Notification />
+        <Switch>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="/">
+            {user === null ?
+              loginForm() :
+              showBlogs()
+            }
+          </Route>
+        </Switch>
+
+      </Router>
     </div>
   )
 }

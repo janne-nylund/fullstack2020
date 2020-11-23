@@ -14,13 +14,17 @@ body {
   
   
   h1 {
-    color: green;
+    color: rgb(21, 127, 251);
   }
 
   h2 {
-    color: green;
+    color: rgb(10, 96, 196);
   }
   
+  h3 {
+    color: rgb(10, 96, 196);
+  }
+
   button {
     margin-bottom: 10px;
   }
@@ -62,5 +66,6 @@ body {
   
   .blogTitle {
     font-weight: bold;
-    font-size: 20px;   
+    font-size: 20px;
+    color: rgb(10, 96, 196);   
   }
