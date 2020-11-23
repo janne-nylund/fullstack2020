@@ -9,6 +9,10 @@ import Togglable from './components/Togglable'
 import { useDispatch } from 'react-redux'
 import { setNotification } from './reducers/notificationReducer'
 
+import { Button } from 'react-bootstrap'
+// import { Table, Form, Button } from 'react-bootstrap'
+
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
@@ -147,8 +151,9 @@ const App = () => {
   }
 
   const showBlogs = () => (
-    <div>
-      <p>{user.name} logged in<input type='button' value='logout' onClick={logOut}/></p>
+    <div className="container">
+      <h1>BLOGS</h1>
+      <p>{user.name} logged in <Button variant="primary" onClick={logOut}>logout</Button></p>
       <div>{blogForm()}</div>
       <>
         {blogs.sort(sortByLike).map(blog =>
@@ -165,8 +170,7 @@ const App = () => {
   )
 
   return (
-    <div>
-      <h1>BLOGS</h1>
+    <div className="container">
       <Notification />
       {user === null ?
         loginForm() :

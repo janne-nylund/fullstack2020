@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button } from 'react-bootstrap'
 
 const Blog = ({ blog, addLike, user, removeBlog }) => {
   const [showInfo, setShowInfo] = useState(false)
@@ -22,7 +23,7 @@ const Blog = ({ blog, addLike, user, removeBlog }) => {
 
   const showRemoveButton = () => {
     if(blog.user.username === user.username){
-      return <button onClick={removeBlog}>Remove</button>
+      return <Button variant="danger" onClick={removeBlog}>Remove</Button>
     } else{
       return null
     }
@@ -32,14 +33,14 @@ const Blog = ({ blog, addLike, user, removeBlog }) => {
     <div style={blogStyle} className='blog'>
 
       <div style={hideWhenView} className='default'>
-        <p className='blogTitle'>{blog.title} <button onClick={() => setShowInfo(true)}>view</button></p>
+        <p className='blogTitle'>{blog.title} <Button  variant="secondary" onClick={() => setShowInfo(true)}>view</Button></p>
         <b>Author: </b>{blog.author}<br/>
       </div>
       <div style={showWhenView} className='onView'>
-        <p className='blogTitle'>{blog.title} <button onClick={() => setShowInfo(false)}>hide</button></p>
+        <p className='blogTitle'>{blog.title} <Button   variant="secondary" onClick={() => setShowInfo(false)}>hide</Button></p>
         <b>Author: </b>{blog.author}<br/>
         <b>Url: </b>{blog.url}<br/>
-        <b className='likes'>Likes: </b>{blog.likes} <button onClick={addLike}>like</button><br/>
+        <b className='likes'>Likes: </b>{blog.likes} <Button  variant="secondary" onClick={addLike}>like</Button><br/>
         <b>Created by: </b>{blog.user.name}<br/>
         {showRemoveButton()}<br/>
       </div>
